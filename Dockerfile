@@ -66,6 +66,14 @@ RUN mkdir -p /var/log/supervisord
 # Configuration for dynamo-admin to know where to hit dynamo.
 ENV DYNAMO_ENDPOINT http://localhost:8002/
 
+# Dummy AWS credentials for dynamodb-admin to use to connect to DynamoDB
+ENV AWS_ACCESS_KEY_ID=nobody
+ENV AWS_SECRET_ACCESS_KEY=notsecret
+# NB: Normally the credentials for DynamoDB access would be passed-in as env
+# vars to the docker container to avoid hard-coding the values, but since
+# DynamoDB-local does not require real credentials, nor does it verify them,
+# it is convenient to provide default values here to avoid setup complexity.
+
 # For dinghy users.
 ENV VIRTUAL_HOST dynamo.docker
 ENV VIRTUAL_PORT 8000
